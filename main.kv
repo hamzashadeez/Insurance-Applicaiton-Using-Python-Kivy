@@ -1,0 +1,433 @@
+
+#:import MDTextField kivymd.textfields
+#:import MDCheckbox kivymd.selectioncontrols.MDCheckbox
+#:import MDCard kivymd.cards
+#:import MDToolbar kivymd.toolbar.MDToolbar
+#:import MDRaisedButton kivymd.button.MDRaisedButton
+#:import MDBottomNavigation kivymd.bottomnavigation
+
+BoxLayout:
+    ScreenManager:
+        id: manager
+        Screen:
+            name: 'home'
+            BoxLayout:
+                orientation:'vertical'
+                MDToolbar:
+                    id: toolbar
+                    title: 'INSURANCE COMPANY'
+                    md_bg_color: app.theme_cls.primary_color
+                    left_action_items: [['menu', lambda x: '']]
+
+                MDBottomNavigation:
+                    MDBottomNavigationItem:
+                        name: 'files12'
+                        text: 'Apply'
+                        icon: 'application'
+                        BoxLayout:
+                            orientation: 'vertical'
+                            padding: 10, 40
+                            MDCard:
+                                orientation: 'vertical'
+                                size_hint: .9,.6
+                                padding: 10
+                                pos_hint: {'top':.8, 'right':.95}
+                                elevation: 10
+                                MDLabel:
+                                    text:'Choose the type of insurance you want.'
+                                    font_size: 20
+                                    size_hint_y: .1
+                                MDLabel:
+                                    text: ''
+                                    size_hint_y:.05
+                                BoxLayout:
+                                    size_hint_y:.4
+                                    spacing: 10
+                                    padding: 1, 30
+                                    GridLayout:
+                                        cols: 2
+                                        MDCheckbox:
+                                            group: 'h'
+                                            on_active: app.active('life')
+                                        MDLabel:
+                                            text: 'LIFE'
+                                        MDCheckbox:
+                                            group: 'h'
+                                            on_active: app.active('property')
+                                        MDLabel:
+                                            text: 'PROPERTY'
+                                        MDCheckbox:
+                                            group: 'h'
+                                            on_active: app.active('car')
+                                        MDLabel:
+                                            text: 'CAR'
+                                        MDCheckbox:
+                                            group: 'h'
+                                            on_active: app.active('medical')
+                                        MDLabel:
+                                            text: 'MEDICAL'
+                                MDLabel:
+                                    text: ''
+                                    size_hint_y: .1
+                                MDRaisedButton:
+                                    text: 'APPLY'
+                                    size_hint: 1,.08
+                                    on_release: app.apply()
+
+
+                    MDBottomNavigationItem:
+                        name: 'files1'
+                        text: 'Profile'
+                        icon: 'account'
+                        BoxLayout:
+                            padding: 15
+                            MDCard:
+                                size_hint: 1,1
+                                spacing:10
+                                orientation: 'vertical'
+                                BoxLayout:
+                                    size_hint_y: .1
+                                    MDRaisedButton:
+                                        text: 'Insurance Added'
+                                        size_hint_x: 1
+                                ScrollView:
+                                    size_hint_y: .9
+                                    do_scroll_x: False
+                                    MDList:
+                                        spacing:10
+                                        # size_hint_y: None
+                                        # height: self.minimum_height
+                                        # size_hint: 1,1
+                                        id: liste
+                                        
+                    MDBottomNavigationItem:
+                        name: 'files2'
+                        text: 'Pay'
+                        icon: 'cash-multiple'
+                        FloatLayout:
+                            MDCard:
+                                orientation: 'vertical'
+                                size_hint: .9, .9
+                                elevation: 14
+                                spacing: 5
+                                pos: 20, 30
+                                Image:
+                                    source: 'card.png'
+                                    allow_stretch: True
+                                    keep_ratio: False
+                                    size_hint_y: .4
+                                BoxLayout:
+                                    orientation:'vertical'
+                                    size_hint_y: .6
+                                    padding: 10
+                                    spacing: 10
+                                    MDTextField:
+                                        hint_text:'Card Number..'
+                                        required: True
+                                        helper_text: "16-digits numbers "
+                                        helper_text_mode: "persistent"
+
+                                    MDTextField:
+                                        hint_text:'THRU VALID'
+                                        required: True
+                                        helper_text: "E.g 12/21 "
+                                        helper_text_mode: "persistent"
+                                    MDTextField:
+                                        hint_text:'435'
+                                        required: True
+                                        helper_text: "3 digits for the other card side"
+                                        helper_text_mode: "persistent"
+                                    
+                                    MDRaisedButton:
+                                        text: 'PAY FOR IT'
+                                        size_hint_x: 1
+                                        on_release: app.pay()
+                    MDBottomNavigationItem:
+                        name: 'files3'
+                        text: 'About'
+                        icon: 'account-card-details-outline'
+                        FloatLayout:
+                            MDCard:
+                                orientation: 'vertical'
+                                size_hint: .9, .9
+                                elevation: 14
+                                spacing: 5
+                                pos: 20, 30
+                                Image:
+                                    source: 'img.png'
+                                    allow_stretch: True
+                                    keep_ratio: False
+                                    size_hint_y: .4
+                                MDList:
+                                    size_hint_y: .6
+                                    TwoLineListItem:
+                                        text: 'Full Name'
+                                        secondary_text: 'ABUBAKAR DANLADI (ABK)'
+                                    TwoLineListItem:
+                                        text: 'Registration Number'
+                                        secondary_text: 'U1/14/CSC/2375'
+                                    TwoLineListItem:
+                                        text: 'Phone Number'
+                                        secondary_text: '+234 806 068 0504'
+                                    
+        
+        Screen:
+            name: 'life'
+            BoxLayout:
+                orientation:'vertical'
+                MDToolbar:
+                    id: toolbar
+                    title: 'LIFE INSURANCE'
+                    md_bg_color: app.theme_cls.primary_color
+                    left_action_items: [['arrow-left', lambda x: app.changeScreen('home')]]
+                BoxLayout:
+                    padding: 10
+                    MDCard:
+                        orientation: 'vertical'
+                        elevation: 9
+                        spacing: 10
+                        Image:
+                            source: 'files/life.png'
+                            keep_ratio: False
+                            allow_stretch: True
+                            size_hint_y: .2
+                        ScrollView:
+                            size_hint_y:.7
+                            BoxLayout:
+                                padding: 10
+                                size_hint_y: None
+                                height: self.minimum_height
+                                orientation: 'vertical'
+                                MDTextField:
+                                    hint_text:'Full Name'
+                                    required: True
+                                    id: nameL
+                                MDTextField:
+                                    hint_text:'Address'
+                                    required: True
+                                    id: addL
+                                MDTextField:
+                                    hint_text:'Phone Number'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'City'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'State'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Zip Code'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Country'
+                                    required: True        
+                                    
+                                MDTextField:
+                                    hint_text:'Birth Date'
+                                    required: True
+                                    helper_text: "DD - MM - YY"
+                                    helper_text_mode: "persistent"
+                                MDTextField:
+                                    hint_text:'Life Plan'
+                                    required: True
+                                    helper_text: "5 years, 10 years or full years"
+                                    helper_text_mode: "persistent"
+
+                                MDTextField:
+                                    hint_text: 'Height'
+                                    helper_text: "In meters "
+                                    helper_text_mode: "persistent"
+
+                                MDTextField:
+                                    hint_text: 'Weight'
+                                    helper_text: "In grams "
+                                    helper_text_mode: "persistent"
+
+                                MDTextField:
+                                    hint_text: 'health issue'
+                                    helper_text: "Describe any health issues? "
+                                    helper_text_mode: "persistent"
+
+                                MDRaisedButton:
+                                    text: ''
+                                    size_hint: 1,.1
+                                    background_color: 1,1,1
+                                    background_normal: ''
+                                MDLabel: 
+                                    text: ''
+
+
+                        MDRaisedButton:
+                            size_hint: 1, .08
+                            text: 'DONE'
+                            on_release: app.applyIn('Life',nameL, addL)
+        
+        Screen:
+            name: 'property'
+            BoxLayout:
+                orientation:'vertical'
+                MDToolbar:
+                    id: toolbar
+                    title: 'PROPERTY INSURANCE'
+                    md_bg_color: app.theme_cls.primary_color
+                    left_action_items: [['arrow-left', lambda x: app.changeScreen('home')]]
+                BoxLayout:
+                    padding: 10
+                    MDCard:
+                        orientation: 'vertical'
+                        elevation: 9
+                        spacing: 10
+                        Image:
+                            source: 'files/property.png'
+                            keep_ratio: False
+                            allow_stretch: True
+                            size_hint_y: .2
+                        ScrollView:
+                            size_hint_y:.7
+                            BoxLayout:
+                                padding: 10
+                                size_hint_y: None
+                                height: self.minimum_height
+                                orientation: 'vertical'
+                                MDTextField:
+                                    hint_text:'Address'
+                                    required: True
+                                    id: addP
+                                MDTextField:
+                                    hint_text:'Zipcode'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Duration'
+                                    required: True
+                                    id: duP
+                                MDTextField:
+                                    hint_text:'Name of the property'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Any otherdescription'
+                                    required: True
+                                
+                        MDRaisedButton:
+                            size_hint: 1, .08
+                            text: 'DONE'
+                            on_release: app.applyIn('Property',addP,duP)
+        
+
+
+        Screen:
+            name: 'car'
+            BoxLayout:
+                orientation:'vertical'
+                MDToolbar:
+                    id: toolbar
+                    title: 'CAR INSURANCE'
+                    md_bg_color: app.theme_cls.primary_color
+                    left_action_items: [['arrow-left', lambda x: app.changeScreen('home')]]
+                BoxLayout:
+                    padding: 10
+                    MDCard:
+                        orientation: 'vertical'
+                        elevation: 9
+                        spacing: 10
+                        Image:
+                            source: 'files/car.png'
+                            keep_ratio: False
+                            allow_stretch: True
+                            size_hint_y: .2
+                        ScrollView:
+                            size_hint_y:.7
+                            BoxLayout:
+                                padding: 10
+                                size_hint_y: None
+                                height: self.minimum_height
+                                orientation: 'vertical'
+                                MDTextField:
+                                    hint_text:'Full Name'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Address'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Phone Number'
+                                    required: True
+                                    id: phC
+                                MDTextField:
+                                    hint_text:'City'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'State'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Number of Vehicle'
+                                    required: True
+                                    id: noC
+                                MDTextField:
+                                    hint_text:'Country'
+                                    required: True  
+                                MDTextField:
+                                    hint_text:'type of vehicle'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Other Related Detail'
+                                    required: True        
+                        MDRaisedButton:
+                            size_hint: 1, .08
+                            text: 'DONE'
+                            on_release: app.applyIn('Car',phC,noC)
+        Screen:
+            name: 'medical'
+            BoxLayout:
+                orientation:'vertical'
+                MDToolbar:
+                    id: toolbar
+                    title: 'MEDICAL INSURANCE'
+                    md_bg_color: app.theme_cls.primary_color
+                    left_action_items: [['arrow-left', lambda x: app.changeScreen('home')]]
+                BoxLayout:
+                    padding: 10
+                    MDCard:
+                        orientation: 'vertical'
+                        elevation: 9
+                        spacing: 10
+                        Image:
+                            source: 'files/health.png'
+                            keep_ratio: False
+                            allow_stretch: True
+                            size_hint_y: .2
+                        ScrollView:
+                            size_hint_y:.7
+                            BoxLayout:
+                                padding: 10
+                                size_hint_y: None
+                                height: self.minimum_height
+                                orientation: 'vertical'
+                                MDTextField:
+                                    hint_text:'Full Name'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Gender'
+                                    required: True
+                                    id:gen
+                                MDTextField:
+                                    hint_text:'Age'
+                                    required: True
+                                    id: age 
+                                MDTextField:
+                                    hint_text:'Parent Status'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Date of Birth'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Disease if any'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Address'
+                                    required: True
+                                MDTextField:
+                                    hint_text:'Email'
+                                    required: True
+                        MDRaisedButton:
+                            size_hint: 1, .08
+                            text: 'DONE'
+                            on_release: app.applyIn('Medical', gen,age)
